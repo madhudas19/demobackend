@@ -4,11 +4,19 @@ const app =express()
 const {dbconnection} =require("./config/db.js")
 
 
- const {registerController} =require("./controllers/userController.js")
+ const {registerController
+    ,loginController,
+    getAllUserController,
+    deleteUserController} =require("./controllers/userController.js")
+
+
  const {productController} =require("./controllers/productController.js")
 
 
-
+ const {
+    addressCreateController,
+    allAddressController,deleteAddress
+} =require("./controllers/addressController.js")
 
 
 
@@ -17,30 +25,26 @@ dbconnection()
 
 
 
-
-
-
-
-
-
 app.use(cors())
 app.use(express.json())
 
 
+app.post("/login",loginController)
+app.post("/register",registerController)
+app.get("/allusers",getAllUserController)
+app.post("/deleteuser",deleteUserController)
+
+
+//
+app.post("/productCreate",productController)
+//
+app.post("/saveAddress",addressCreateController)
+app.get("/getAllAddress",allAddressController)
+app.post("/dataDelete",deleteAddress)
 
 
 
 
-
-
-
-app.post("/login",registerController)
-app.post("/register",productController)
-app.post("/productcreate",productController)
-
-
-
-
-app.listen(4010,()=>{
+app.listen(4000,()=>{
     console.log("test");
 })

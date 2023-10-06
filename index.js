@@ -1,6 +1,7 @@
 const express=require("express")
 const cors =require("cors")
 const app =express()
+const fileUpload=require("express-fileupload")
 const {dbconnection} =require("./config/db.js")
 
 
@@ -10,15 +11,21 @@ const {dbconnection} =require("./config/db.js")
     deleteUserController} =require("./controllers/userController.js")
 
 
- const {productController} =require("./controllers/productController.js")
-
+ const {productCreateController,
+getSingleProduct} =require("./controllers/productController.js")
+//address controller
 
  const {
     addressCreateController,
     allAddressController,deleteAddress
 } =require("./controllers/addressController.js")
 
+//category controller
 
+const{
+    categoryCreateController,
+    
+}=require("./controllers/categoryController.js")
 
 
 dbconnection()
@@ -26,6 +33,7 @@ dbconnection()
 
 
 app.use(cors())
+app.use(fileUpload())
 app.use(express.json())
 
 
@@ -36,12 +44,16 @@ app.post("/deleteuser",deleteUserController)
 
 
 //
-app.post("/productCreate",productController)
+app.post("/productCreate",productCreateController)
+app.post("/getSingleProduct",getSingleProduct)
 //
 app.post("/saveAddress",addressCreateController)
 app.get("/getAllAddress",allAddressController)
 app.post("/dataDelete",deleteAddress)
 
+
+//category route
+app.post("/saveCategory",categoryCreateController)
 
 
 

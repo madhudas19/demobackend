@@ -1,27 +1,28 @@
 const mongoose=require("mongoose")
 
-
+const { ObjectId } = mongoose.Schema;
 
 const productSchema =new mongoose.Schema({
-    name:{
+    productName:{
         type:String,
         required:true
     },
-    phone:{
-        type:String,
-        required:true
-    },
-    age:{
+    price:{
         type:Number,
         required:true
     },
-    gender:{
+    description:{
+        type:String,
+        required:true
+    },
+    image:{
         type: String,
-        enum: ["male","female","other"],
-        default:"male"
-        // enum : ['NEW,'STATUS'],
-        // default: 'NEW'
-    }
+        required:true
+        
+    },
+    category: {
+         type:ObjectId,
+         ref: 'Category' }
 })
 
 

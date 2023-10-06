@@ -30,8 +30,7 @@ const registerController = async (req, res) => {
 
 const loginController = async (req, res) => {
   const {password,email} =req.body
-  // const email = req.body.email
-  console.log(email,password);
+ 
 
   const findemail=await User.findOne({email})
   console.log(findemail);
@@ -39,8 +38,12 @@ const loginController = async (req, res) => {
     return res.status(200).json({ error: "invalid credential" })
   }
 
-
-  return res.status(200).json({ message: "logged in" })
+ const loginUser={
+  _id:findemail._id,
+  email:findemail.email,
+   message: "logged in"
+ }
+  return res.status(200).json(loginUser)
 }
 
 const getAllUserController = async (req, res) => {

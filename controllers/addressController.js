@@ -30,7 +30,7 @@ const addressCreateController=async(req,res)=>{
 const allAddressController=async(req,res)=>{
   // console.log(req);
   try {
-    const allData=await Address.find()
+    const allData=await Address.find().sort('-updatedAt').limit(2)
       
 
     return res.status(200).json(allData)
